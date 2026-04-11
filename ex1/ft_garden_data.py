@@ -1,16 +1,33 @@
+#!/usr/bin/env python3
+
 class Plant:
-	def __init__(self, name, height, age):
-		self.age = age
-		self.name = name
-		self.height = height
-def plant_str(p):
-	print(f"{p.name}: {p.height}cm, {p.age} days old")
+    def __init__(self):
+        self.age = None
+        self.name = None
+        self.height = None
+
+    def show(self):
+        print(f"{self.name}: {self.height}cm, {self.age} days old")
+
 
 if __name__ == "__main__":
-	plant1 = Plant("Rose",25,30)
-	plant2 = Plant("Sunflower",80,45)
-	plant3 = Plant("Cactus",15,120)
-	print("=== Garden Plant Registry ===")
-	plant_str(plant1)
-	plant_str(plant2)
-	plant_str(plant3)
+    print("=== Garden Plant Registry ===")
+
+    rose = Plant()
+    rose.name = "Rose"
+    rose.height = 25
+    rose.age = 30
+
+    sunflower = Plant()
+    sunflower.name = "Sunflower"
+    sunflower.height = 80
+    sunflower.age = 45
+
+    cactus = Plant()
+    cactus.name = "Cactus"
+    cactus.height = 15
+    cactus.age = 120
+
+    rose.show()
+    sunflower.show()
+    cactus.show()
