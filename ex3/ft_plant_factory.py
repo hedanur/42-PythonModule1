@@ -1,18 +1,30 @@
 #!/usr/bin/env python3
 
 class Plant:
-    def __init__(self):
-        self.age = None
-        self.name = None
-        self.height = None
+    def __init__(self, name, height, age):
+        self.age = age
+        self.name = name
+        self.height = height
 
     def show(self):
         print(f"{self.name}: {self.height}cm, {self.age} days old")
 
-    def grow(self):
-        self.height = round(self.height + 0.8, 1)
 
-    def age_plant(self):
-        self.age += 1
+if __name__ == "__main__":
+    rose = Plant("Rose", 25.0, 30)
+    oak = Plant("Oak", 200.0, 365)
+    cactus = Plant("Cactus", 5.0, 90)
+    sunflower = Plant("Sunflower", 80.0, 45)
+    fern = Plant("Fern", 15.0, 120)
 
-
+    print("=== Plant Factory Output ===")
+    print("Created: ", end="")
+    rose.show()
+    print("Created: ", end="")
+    oak.show()
+    print("Created: ", end="")
+    cactus.show()
+    print("Created: ", end="")
+    sunflower.show()
+    print("Created: ", end="")
+    fern.show()
