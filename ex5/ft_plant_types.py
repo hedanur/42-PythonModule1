@@ -22,7 +22,7 @@ class Tree(Plant):
         super().__init__(name, height, _age)
         self.trunk_diameter = trunk_diameter
 
-        print(f"[asking the {self.name} to produce shade]")
+        print(f"[asking the {self.name} to produce shade]") #bu print burada mi kalmalı
 
     def show(self):
         super().show()
@@ -81,7 +81,6 @@ if __name__ == "__main__":
     oak = Tree("Oak", 200.0, 365, 5.0)
     oak.show()
     oak.produce_shade()
-    
 
     print("\n=== Vegetable")
     tomato = Vegetable("Tomato", 5.0, 10, "April", 0)
