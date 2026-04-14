@@ -29,6 +29,10 @@ class Plant:
             return True
         else:
             return False
+        
+    @classmethod
+    def create_anonymous(cls):
+        return cls("Unknown plant", 0.0, 0)
 
     class Stats:
         def __init__(self):
@@ -37,7 +41,7 @@ class Plant:
             self.show_count = 0
 
         def display(self, plant_name):
-            print(f"[statistics for {plant_name}]")
+            print(f" [statistics for {plant_name}]")
             print(f"Stats: {self.grow_count} grow, {self.age_count} age\
  {self.show_count} show")
 
@@ -57,7 +61,7 @@ class Tree(Plant):
 
     def show(self):
         super().show()
-        print(f" Trunk diameter: {self.trunk_diameter}")
+        print(f" Trunk diameter: {self.trunk_diameter}cm")
 
     def produce_shade(self):
         print(f"Tree {self.name} now produces a shade of {self.height}cm\
@@ -71,7 +75,7 @@ class Tree(Plant):
 
         def display(self, plant_name):
             super().display(plant_name)
-            print(f"{self.shade_count} shade")
+            print(f" {self.shade_count} shade")
 
 
 class Flower(Plant):
@@ -92,20 +96,19 @@ class Flower(Plant):
             self.is_bloom = True
 
 
-class Vegetable(Plant):
-    def __init__(self, name, height, _age, harvest, nutritional):
-        super().__init__(name, height, _age)
-        self.harvest = harvest
-        self.nutritional = nutritional
+class Seed(Flower):
+    def __init__(self, name, height, _age, color, seeds):
+        super().__init__(name, height, _age, color)
+        self.seeds = seeds
 
     def show(self):
         super().show()
-        print(f" Harvest season: {self.harvest}")
-        print(f" Nutritional value: {self.nutritional}")
+        if self.is_bloom:
+            print(f" Seeds: {self.seeds}")
 
-    def age(self, n):
-        self.nutritional += n
+    def age(self, n, n_seed):
         super().age(n)
+        self.seeds += n_seed 
 
 
 if __name__ == "__main__":
@@ -132,10 +135,18 @@ if __name__ == "__main__":
     oak.produce_shade()
     display_plant_stats(oak)
 
-    print("\n=== Vegetable")
-    tomato = Vegetable("Tomato", 5.0, 10, "April", 0)
-    tomato.show()
-    print(f"[make {tomato.name} grow and age for 20 days]")
-    tomato.grow(42)
-    tomato.age(20)
-    tomato.show()
+    print("\n=== Seed")
+    sunflower = Seed("Sunflower", 80.0, 45, "yellow", 0)
+    sunflower.show()
+    sunflower.bloom()
+    print(f"[make {sunflower.name} grow, age and bloom]") #mantıklı mı print burada
+    sunflower.grow(30)
+    sunflower.age(20, 42)
+    sunflower.show()
+    display_plant_stats(sunflower)
+
+    print("\n=== Anonymous")
+    anon = Plant.create_anonymous()
+    anon.show()
+    display_plant_stats(anon)
+

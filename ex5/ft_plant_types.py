@@ -29,18 +29,18 @@ class Tree(Plant):
         print(f"Trunk diameter: {self.trunk_diameter}")
 
     def produce_shade(self):
-        print(f"Tree {self.name} now produces a shade of {self.height}\
- long and {self.trunk_diameter} wide.")
+        print(f"Tree {self.name} now produces a shade of {self.height}cm\
+ long and {self.trunk_diameter}cm wide.")
 
 
 class Flower(Plant):
-    def __init__(self, name, height, _age, colour):
+    def __init__(self, name, height, _age, color):
         super().__init__(name, height, _age)
-        self.colour = colour
+        self.color = color
 
     def show(self):
         super().show()
-        print(f" Colour: {rose.colour}")
+        print(f" Color: {rose.color}")
 
     def bloom(self):
         if not self.is_bloom:
