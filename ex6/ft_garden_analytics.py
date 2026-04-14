@@ -51,16 +51,27 @@ def display_plant_stats(plant): #?
 class Tree(Plant):
     def __init__(self, name, height, _age, trunk_diameter):
         super().__init__(name, height, _age)
+        self.__shade_count = 0
         self.trunk_diameter = trunk_diameter
+        self._Plant__stats = self.Stats()
 
     def show(self):
         super().show()
         print(f" Trunk diameter: {self.trunk_diameter}")
-        print(f"[asking the {self.name} to produce shade]")
 
     def produce_shade(self):
-        print(f"Tree {self.name} now produces a shade of {self.height}\
- long and {self.trunk_diameter} wide.")
+        print(f"Tree {self.name} now produces a shade of {self.height}cm\
+ long and {self.trunk_diameter}cm wide.")
+        self.get_stats().shade_count += 1
+
+    class Stats(Plant.Stats):
+        def __init__(self):
+            super().__init__()  #??
+            self.shade_count = 0
+
+        def display(self, plant_name):
+            super().display(plant_name)
+            print(f"{self.shade_count} shade")
 
 
 class Flower(Plant):
@@ -116,7 +127,10 @@ if __name__ == "__main__":
     print("\n=== Tree")
     oak = Tree("Oak", 200.0, 365, 5.0)
     oak.show()
+    display_plant_stats(oak)
+    print(f"[asking the {oak.name} to produce shade]")
     oak.produce_shade()
+    display_plant_stats(oak)
 
     print("\n=== Vegetable")
     tomato = Vegetable("Tomato", 5.0, 10, "April", 0)
