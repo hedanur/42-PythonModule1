@@ -29,7 +29,7 @@ class Plant:
             return True
         else:
             return False
-        
+
     @classmethod
     def create_anonymous(cls):
         return cls("Unknown plant", 0.0, 0)
@@ -108,7 +108,7 @@ class Seed(Flower):
 
     def age(self, n, n_seed):
         super().age(n)
-        self.seeds += n_seed 
+        self.seeds += n_seed
 
 
 if __name__ == "__main__":

@@ -1,18 +1,23 @@
 #!/usr/bin/env python3
 
 class Plant:
-    def __init__(self):
-        self.age = None
-        self.name = None
-        self.height = None
+    name: str
+    height: float
+    age: int
 
-    def show(self):
+    def __init__(self) -> None:
+        self.age = 0
+        self.name = ""
+        self.height = 0
+        self.growth_rate = 0.8
+
+    def show(self) -> None:
         print(f"{self.name}: {self.height}cm, {self.age} days old")
 
-    def grow(self):
-        self.height = round(self.height + 0.8, 1)
+    def grow(self) -> None:
+        self.height = round(self.height + self.growth_rate, 1)
 
-    def age_plant(self):
+    def age_plant(self) -> None:
         self.age += 1
 
 
@@ -27,7 +32,7 @@ if __name__ == "__main__":
     rose.grow()
     rose.age_plant()
     i = 1
-    while (i < 8):
+    while i < 8:
         print(f"=== Day {i} ===")
         rose.show()
         rose.grow()

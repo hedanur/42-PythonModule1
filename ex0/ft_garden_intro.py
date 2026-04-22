@@ -6,7 +6,7 @@ if __name__ == "__main__":
     height = "25cm"
 
     print("=== Welcome to My Garden ===")
-    print("Plant:", name)
-    print("Height:", height)
-    print("Age:", age)
+    print(f"Plant: {name}")
+    print(f"Height: {height}")
+    print(f"Age:  {age}")
     print("\n=== End of Program ===")
