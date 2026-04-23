@@ -4,68 +4,83 @@ class Plant:
     _name: str
     _height: float
     _age: int
-    def __init__(self, name, height, age):
-        self.name = name
-        self._age = age  #_age kullanmak mantıklı mı
-        self.height = height
-        self.is_bloom = False
 
-    def grow(self, added_height):
-        self.height += added_height
+    def __init__(self, name: str, height: float, age: int) -> None:
+        self._name = name
+        self._age = age
+        self._height = float(height)
 
-    def age(self, added_age):
+    def grow(self, added_height: float) -> None:
+        self._height += added_height
+
+    def age(self, added_age: int) -> None:
         self._age += added_age
 
-    def show(self):
-        print(f"{self.name}: {self.height}cm, {self._age} days old")
+    def show(self) -> None:
+        print(f"{self._name}: {self._height}cm, {self._age} days old")
 
 
 class Tree(Plant):
-    def __init__(self, name, height, _age, trunk_diameter):
-        super().__init__(name, height, _age)
-        self.trunk_diameter = trunk_diameter
+    _trunk_diameter: float
 
-        print(f"[asking the {self.name} to produce shade]") #bu print burada mi kalmalı
+    def __init__(
+                self, name: str, height: float, age: int,
+                trunk_diameter: float) -> None:
+        super().__init__(name, height, age)
+        self._trunk_diameter = trunk_diameter
 
-    def show(self):
+    def show(self) -> None:
+
         super().show()
-        print(f"Trunk diameter: {self.trunk_diameter}")
+        print(f" Trunk diameter: {self._trunk_diameter}cm")
 
-    def produce_shade(self):
-        print(f"Tree {self.name} now produces a shade of {self.height}cm\
- long and {self.trunk_diameter}cm wide.")
+    def produce_shade(self) -> None:
+        print(f"Tree {self._name} now produces a shade of {self._height}cm\
+ long and {self._trunk_diameter}cm wide.")
 
 
 class Flower(Plant):
-    def __init__(self, name, height, _age, color):
-        super().__init__(name, height, _age)
-        self.color = color
+    _color: str
+    _is_bloom: bool
 
-    def show(self):
+    def __init__(self, name: str, height: float, age: int, color: str) -> None:
+        super().__init__(name, height, age)
+        self._color = color
+        self._is_bloom = False
+
+    def show(self) -> None:
         super().show()
-        print(f" Color: {self.color}")
-
-    def bloom(self):
-        if not self.is_bloom:
-            self.is_bloom = True
-            print(f" {self.name} has not bloomed yet")
+        print(f" Color: {self._color}")
+        if not self._is_bloom:
+            print(f" {self._name} has not bloomed yet")
         else:
-            print(f" {self.name} is blooming beautifully!")
+            print(f" {self._name} is blooming beautifully!")
+
+    def bloom(self) -> None:
+        self._is_bloom = True
 
 
 class Vegetable(Plant):
-    def __init__(self, name, height, _age, harvest, nutritional):
-        super().__init__(name, height, _age)
-        self.harvest = harvest
-        self.nutritional = nutritional
+    _harvest: str
+    _nutritional: int
 
-    def show(self):
+    def __init__(
+                self, name: str, height: float, age: int,
+                harvest: str, nutritional: int = 0) -> None:
+        super().__init__(name, height, age)
+        self._harvest = harvest
+        self._nutritional = nutritional
+
+    def show(self) -> None:
         super().show()
-        print(f"Harvest season: {self.harvest}")
-        print(f"Nutritional value: {self.nutritional}")
+        print(f" Harvest season: {self._harvest}")
+        print(f" Nutritional value: {self._nutritional}")
 
-    def age(self, n):
-        self.nutritional += n
+    def grow(self, n: float) -> None:
+        super().grow(n)
+
+    def age(self, n: int) -> None:
+        self._nutritional += n
         super().age(n)
 
 
@@ -75,21 +90,20 @@ if __name__ == "__main__":
     print("=== Flower")
     rose = Flower("Rose", 15.0, 10, "red")
     rose.show()
-    rose.bloom()
     print("[asking the rose to bloom]")
-    rose.show()
     rose.bloom()
+    rose.show()
 
     print("\n=== Tree")
     oak = Tree("Oak", 200.0, 365, 5.0)
     oak.show()
+    print(f"[asking the {oak._name.lower()} to produce shade]")
     oak.produce_shade()
 
     print("\n=== Vegetable")
     tomato = Vegetable("Tomato", 5.0, 10, "April", 0)
     tomato.show()
-    print(f"[make {tomato.name} grow and age for 20 days]")
-    tomato.grow(42)
+    print(f"[make {tomato._name.lower()} grow and age for 20 days]")
+    tomato.grow(42.0)
     tomato.age(20)
     tomato.show()
-
