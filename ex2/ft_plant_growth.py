@@ -26,6 +26,7 @@ class Plant:
 
 if __name__ == "__main__":
     rose = Plant("Rose", 25.0, 30)
+    first_height = rose.height
 
     print("=== Garden Plant Growth ===")
     rose.show()
@@ -38,4 +39,5 @@ if __name__ == "__main__":
         print(f"=== Day {i} ===")
         rose.show()
         i += 1
-    print(f"Growth this week: {round(rose.growth_rate * 7, 1)}cm")
+    total_height = round(rose.height - first_height, 1)
+    print(f"Growth this week: {total_height}cm")
