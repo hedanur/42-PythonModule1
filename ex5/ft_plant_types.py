@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 
 class Plant:
+    _name: str
+    _height: float
+    _age: int
     def __init__(self, name, height, age):
         self.name = name
         self._age = age  #_age kullanmak mantıklı mı
@@ -40,7 +43,7 @@ class Flower(Plant):
 
     def show(self):
         super().show()
-        print(f" Color: {rose.color}")
+        print(f" Color: {self.color}")
 
     def bloom(self):
         if not self.is_bloom:
@@ -90,6 +93,3 @@ if __name__ == "__main__":
     tomato.age(20)
     tomato.show()
 
-
-
-#"Overriding"

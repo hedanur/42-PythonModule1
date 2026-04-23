@@ -4,11 +4,14 @@ class Plant:
     name: str
     height: float
     age: int
+    growth_rate: float
 
-    def __init__(self) -> None:
-        self.age = 0
-        self.name = ""
-        self.height = 0
+    def __init__(
+        self, name: str = "", height: float = 0.0, age: int = 0
+    ) -> None:
+        self.age = age
+        self.name = name
+        self.height = height
         self.growth_rate = 0.8
 
     def show(self) -> None:
@@ -22,20 +25,17 @@ class Plant:
 
 
 if __name__ == "__main__":
-    rose = Plant()
-    rose.name = "Rose"
-    rose.height = 25.0
-    rose.age = 30
+    rose = Plant("Rose", 25.0, 30)
 
     print("=== Garden Plant Growth ===")
     rose.show()
-    rose.grow()
-    rose.age_plant()
+
     i = 1
     while i < 8:
-        print(f"=== Day {i} ===")
-        rose.show()
         rose.grow()
         rose.age_plant()
+
+        print(f"=== Day {i} ===")
+        rose.show()
         i += 1
-    print(f"Growth this week: {round(0.8 * 7, 1)}cm")
+    print(f"Growth this week: {round(rose.growth_rate * 7, 1)}cm")
