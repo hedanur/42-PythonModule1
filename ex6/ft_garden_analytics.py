@@ -6,39 +6,6 @@ class Plant:
     _age: int
     _is_bloom: bool
 
-    def __init__(self, name: str, height: float, age: int) -> None:
-        self._name = name
-        self._age = age
-        self._height = float(height)
-        self._is_bloom = False
-        self._stats = self.Stats()
-
-    def get_stats(self) -> 'Plant.Stats':
-        return self._stats
-
-    def grow(self, added_height: float) -> None:
-        self._height += added_height
-        self._stats.grow_count += 1
-
-    def age(self, added_age: int) -> None:
-        self._age += added_age
-        self._stats.age_count += 1
-
-    def show(self) -> None:
-        print(f"{self._name}: {self._height}cm, {self._age} days old")
-        self._stats.show_count += 1
-
-    @staticmethod
-    def is__big_age(day: int) -> bool:
-        if day > 365:
-            return True
-        else:
-            return False
-
-    @classmethod
-    def create_anonymous(cls) -> 'Plant':
-        return cls("Unknown plant", 0.0, 0)
-
     class Stats:
         grow_count: int
         age_count: int
@@ -54,6 +21,39 @@ class Plant:
             print(f"Stats: {self.grow_count} grow, {self.age_count} age,\
  {self.show_count} show")
 
+    def __init__(self, name: str, height: float, age: int) -> None:
+        self._name = name
+        self._age = age
+        self._height = float(height)
+        self._is_bloom = False
+        self._stats: Plant.Stats = self.Stats()
+
+    @staticmethod
+    def is__big_age(day: int) -> bool:
+        if day > 365:
+            return True
+        else:
+            return False
+
+    @classmethod
+    def create_anonymous(cls) -> 'Plant':
+        return cls("Unknown plant", 0.0, 0)
+
+    def grow(self, added_height: float) -> None:
+        self._height += added_height
+        self._stats.grow_count += 1
+
+    def age(self, added_age: int) -> None:
+        self._age += added_age
+        self._stats.age_count += 1
+
+    def show(self) -> None:
+        print(f"{self._name}: {self._height}cm, {self._age} days old")
+        self._stats.show_count += 1
+
+    def get_stats(self):
+        return self._stats
+
 
 def display_plant_stats(plant: Plant) -> None:
     stats_obj = plant.get_stats()
@@ -62,23 +62,7 @@ def display_plant_stats(plant: Plant) -> None:
 
 class Tree(Plant):
     _trunk_diameter: float
-
-    def __init__(
-                self, name: str, height: float, age: int,
-                trunk_diameter: float) -> None:
-        super().__init__(name, height, age)
-        self._trunk_diameter = trunk_diameter
-        self._stats = self.Stats()
-
-    def show(self) -> None:
-        super().show()
-        print(f" Trunk diameter: {self._trunk_diameter}cm")
-
-    def produce_shade(self) -> None:
-        print(f"Tree {self._name} now produces a shade of {self._height}cm\
- long and {self._trunk_diameter}cm wide.")
-        if isinstance(self._stats, Tree.Stats):
-            self._stats.shade_count += 1
+    _stats: 'Tree.Stats'
 
     class Stats(Plant.Stats):
         shade_count: int
@@ -90,6 +74,27 @@ class Tree(Plant):
         def display(self, plant_name: str) -> None:
             super().display(plant_name)
             print(f" {self.shade_count} shade")
+
+    def __init__(
+                self, name: str, height: float, age: int,
+                trunk_diameter: float) -> None:
+        super().__init__(name, height, age)
+        self._trunk_diameter = trunk_diameter
+        self._stats = self.Stats()
+
+    def get_stats(self):
+        return self._stats
+
+    def show(self) -> None:
+        super().show()
+        print(f" Trunk diameter: {self._trunk_diameter}cm")
+
+    def produce_shade(self) -> None:
+        print(f"Tree {self._name} now produces a shade of {self._height}cm\
+ long and {self._trunk_diameter}cm wide.")
+        t_stats: Tree.Stats = self.Stats()
+        t_stats = self.get_stats()
+        t_stats.shade_count += 1
 
 
 class Flower(Plant):

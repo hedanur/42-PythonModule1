@@ -30,7 +30,6 @@ class Tree(Plant):
         self._trunk_diameter = trunk_diameter
 
     def show(self) -> None:
-
         super().show()
         print(f" Trunk diameter: {self._trunk_diameter}cm")
 
